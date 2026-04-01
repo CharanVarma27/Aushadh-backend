@@ -160,6 +160,7 @@ public class PharmacyDashboardController {
 
     @PutMapping("/{id}/settings")
     public ResponseEntity<?> updatePharmacySettings(@PathVariable Long id, @RequestBody Map<String, Object> updated) {
+        System.out.println("DEBUG: Updating settings for Pharmacy ID: " + id + " with payload: " + updated);
         return pharmacyRepository.findById(id).map(p -> {
             if (updated.containsKey("name")) p.setName(updated.get("name").toString());
             if (updated.containsKey("address")) p.setAddress(updated.get("address").toString());
