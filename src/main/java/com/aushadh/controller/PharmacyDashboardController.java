@@ -24,11 +24,22 @@ public class PharmacyDashboardController {
 
     @GetMapping("/my-store")
     public ResponseEntity<?> getMyStore(@RequestParam Long ownerId) {
-        return pharmacyRepository.findAll().stream()
+        Optional<Pharmacy> existing = pharmacyRepository.findAll().stream()
             .filter(p -> ownerId.equals(p.getOwnerId()))
-            .findFirst()
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+            .findFirst();
+
+        if (existing.isPresent()) {
+            return ResponseEntity.ok(existing.get());
+        }
+
+        // Auto-heal: Create a pharmacy record if it's missing for this owner
+        Pharmacy newPharma = new Pharmacy();
+        newPharma.setName("New Pharmacy - Please Update Settings");
+        newPharma.setOwnerId(ownerId);
+        newPharma.setVerified(false);
+        newPharma = pharmacyRepository.save(newPharma);
+        
+        return ResponseEntity.ok(newPharma);
     }
 
     @Autowired
