@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pharmacy-admin")
-@CrossOrigin(origins = "https://aushadh.onrender.com/")
 public class PharmacyDashboardController {
 
     @Autowired

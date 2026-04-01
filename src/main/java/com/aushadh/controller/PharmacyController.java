@@ -9,7 +9,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/pharmacies")
+<<<<<<< HEAD
 @CrossOrigin(origins = "https://aushadh.onrender.com/")
+=======
+>>>>>>> 0eae9b6 (Fix: Global CORS configuration and controller cleanup)
 public class PharmacyController {
 
     @Autowired
