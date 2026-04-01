@@ -23,6 +23,9 @@ public class AdminController {
     @Autowired
     private PharmacyRepository pharmacyRepository;
 
+    @Autowired
+    private com.aushadh.repository.SystemSettingRepository systemSettingRepository;
+
     @GetMapping("/stats")
     public Map<String, Object> getStats() {
         Map<String, Object> stats = new HashMap<>();
@@ -60,5 +63,15 @@ public class AdminController {
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @GetMapping("/settings")
+    public List<com.aushadh.model.SystemSetting> getSettings() {
+        return systemSettingRepository.findAll();
+    }
+
+    @PostMapping("/settings")
+    public com.aushadh.model.SystemSetting saveSetting(@RequestBody com.aushadh.model.SystemSetting setting) {
+        return systemSettingRepository.save(setting);
     }
 }
