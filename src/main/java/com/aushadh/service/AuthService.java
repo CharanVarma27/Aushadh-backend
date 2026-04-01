@@ -13,9 +13,22 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private com.aushadh.repository.PharmacyRepository pharmacyRepository;
+
     public User register(User user) {
         user.setRole(user.getRole().toUpperCase());
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        if ("PHARMACY".equals(savedUser.getRole())) {
+            com.aushadh.model.Pharmacy pharmacy = new com.aushadh.model.Pharmacy();
+            pharmacy.setName("New Pharmacy - Please Update Settings");
+            pharmacy.setOwnerId(savedUser.getId());
+            pharmacy.setVerified(false);
+            pharmacyRepository.save(pharmacy);
+        }
+
+        return savedUser;
     }
 
     public User login(String email, String password) {

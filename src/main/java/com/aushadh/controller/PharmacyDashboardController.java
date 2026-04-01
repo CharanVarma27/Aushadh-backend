@@ -22,6 +22,15 @@ public class PharmacyDashboardController {
     @Autowired
     private PharmacyRepository pharmacyRepository;
 
+    @GetMapping("/my-store")
+    public ResponseEntity<?> getMyStore(@RequestParam Long ownerId) {
+        return pharmacyRepository.findAll().stream()
+            .filter(p -> ownerId.equals(p.getOwnerId()))
+            .findFirst()
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+    }
+
     @Autowired
     private InventoryRepository inventoryRepository;
 

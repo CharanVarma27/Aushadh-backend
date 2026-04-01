@@ -48,6 +48,7 @@ public class DataSeeder implements CommandLineRunner {
             17.3850, 
             78.4867, 
             "040-12345678", 
+            null, // ownerId for seeded pharmacy
             true, 
             4.5
         );

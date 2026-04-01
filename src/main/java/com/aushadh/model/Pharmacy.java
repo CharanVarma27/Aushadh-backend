@@ -18,6 +18,7 @@ public class Pharmacy {
     private double longitude;
 
     private String phone;
+    private Long ownerId;
 
     private boolean verified;
     private double rating;
@@ -26,13 +27,14 @@ public class Pharmacy {
 
     public Pharmacy(String name, String address, String city,
                     double latitude, double longitude,
-                    String phone, boolean verified, double rating) {
+                    String phone, Long ownerId, boolean verified, double rating) {
         this.name = name;
         this.address = address;
         this.city = city;
         this.latitude = latitude;
         this.longitude = longitude;
         this.phone = phone;
+        this.ownerId = ownerId;
         this.verified = verified;
         this.rating = rating;
     }
@@ -62,4 +64,7 @@ public class Pharmacy {
 
     public double getRating() { return rating; }
     public void setRating(double rating) { this.rating = rating; }
+
+    public Long getOwnerId() { return ownerId; }
+    public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
 }
