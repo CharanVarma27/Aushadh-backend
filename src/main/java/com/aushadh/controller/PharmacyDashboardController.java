@@ -159,12 +159,12 @@ public class PharmacyDashboardController {
     }
 
     @PutMapping("/{id}/settings")
-    public ResponseEntity<?> updatePharmacySettings(@PathVariable Long id, @RequestBody Pharmacy updated) {
+    public ResponseEntity<?> updatePharmacySettings(@PathVariable Long id, @RequestBody Map<String, Object> updated) {
         return pharmacyRepository.findById(id).map(p -> {
-            p.setName(updated.getName());
-            p.setAddress(updated.getAddress());
-            p.setPhone(updated.getPhone());
-            p.setCity(updated.getCity());
+            if (updated.containsKey("name")) p.setName(updated.get("name").toString());
+            if (updated.containsKey("address")) p.setAddress(updated.get("address").toString());
+            if (updated.containsKey("phone")) p.setPhone(updated.get("phone").toString());
+            if (updated.containsKey("city")) p.setCity(updated.get("city").toString());
             pharmacyRepository.save(p);
             return ResponseEntity.ok(p);
         }).orElse(ResponseEntity.notFound().build());
