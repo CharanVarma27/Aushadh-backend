@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/pharmacies")
-@CrossOrigin
+@CrossOrigin(origins = "https://aushadh.onrender.com/")
 public class PharmacyController {
 
     @Autowired
